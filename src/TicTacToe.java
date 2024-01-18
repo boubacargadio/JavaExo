@@ -30,31 +30,29 @@ public class TicTacToe {
                 separator();
             }
         }
-
     }
     private void move() {
+//        scanner= input
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Entrez une ligne entre 0 et 2 : ");
 
+        System.out.println("Entrez une ligne entre 0 et 2 : ");
         try {
             line = Integer.parseInt(scanner.next());
         } catch (NumberFormatException e) {
-            System.out.println("Entrée un nombre.");
+            System.out.println("entree un nombreeeeee!");
         }
-
         if (line >= 0 && line < racineCarre) {
             System.out.println("ligne: " + line);
         } else {
             System.out.println("ligne ou colonne invalide");
         }
-        System.out.println("Entrez une colonne 0 et 2 : ");
 
+        System.out.println("Entrez une colonne 0 et 2 : ");
         try {
             column = Integer.parseInt(scanner.next());
         } catch (NumberFormatException e) {
             System.out.println(" entrer un nombre.");
         }
-
         if (column >= 0 && column < racineCarre) {
             System.out.println("colonne: " + column);
         } else {
@@ -68,7 +66,7 @@ public class TicTacToe {
         display();
     }
 //    public void getMoveFromPlayer2(){
-////        move player2
+//        move player2
 //        move();
 //        System.out.println("player 2");
 //        board[line*3 + column].representation = player2.getRepresentation();
@@ -92,8 +90,15 @@ public class TicTacToe {
         }
     }
 
-    private boolean isOver() {
+    private boolean isOver(Cell p1) {
 
+        int count;
+        for (int i = 0; i<size; i++){
+            line = i/3;
+            if (board[i] == p1){
+
+            }
+        }
         return false;
     }
 
