@@ -1,6 +1,6 @@
 public class Player {
-    String representation;
-    String name;
+    private String representation;
+    private String name;
 
     public Player(){
         this( "| X ");

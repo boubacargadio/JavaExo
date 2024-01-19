@@ -1,3 +1,5 @@
+import org.w3c.dom.ls.LSOutput;
+
 import java.util.Scanner;
 
 public class TicTacToe {
@@ -9,7 +11,7 @@ public class TicTacToe {
     int line;
     int column;
 
-    Cell[] board = new Cell[size];
+    private Cell[] board = new Cell[size];
 //    Player joueur = new Player();
     TicTacToe() { //constructeur
         for (int i=0; i<board.length;i++ ){
@@ -73,7 +75,7 @@ public class TicTacToe {
 //        display();
 //    }
 
-    private boolean isValidMove() {
+    public boolean isValidMove() {
         //verifier si les players n'ont pas jouè au mm endroit
         // verifie si la cellule est libre
         System.out.println("invalide place, entree un autre");
@@ -90,17 +92,59 @@ public class TicTacToe {
         }
     }
 
-    private boolean isOver(Cell p1) {
+    private boolean isOver() {
+        if (checkPlayerWin(player1) || checkPlayerWin(player2)) {
+            return true;
+        }
+        // Check if all cells are occupied
+        for (int i = 0; i <board.length; i++) {
+            if (!(board[i].getRepresentation().equals(player1.getRepresentation())
+                || board[i].getRepresentation().equals(player2.getRepresentation()))) {
+                return false;
+            }
+        }
+        System.out.println("game over!");
+        return true;
+    }
 
-        int count;
-        for (int i = 0; i<size; i++){
-            line = i/3;
-            if (board[i] == p1){
-
+    // verifier si il a rempi un ligne
+    private boolean checkPlayerWin(Player player) {
+        // Check rows
+        for (int i = 0; i < racineCarre; i++) {
+            if (checkRow(i, player) || checkColumn(i, player) || checkDiagonal(player)) {
+                System.out.println(player.getName() + " wins this game!");
+                return true;
             }
         }
         return false;
     }
+
+    private boolean checkRow(int row, Player player) {
+        int start = row * racineCarre;
+        return board[start].getRepresentation().equals(player.getRepresentation()) &&
+                board[start + 1].getRepresentation().equals(player.getRepresentation()) &&
+                board[start + 2].getRepresentation().equals(player.getRepresentation());
+    }
+
+    private boolean checkColumn(int col, Player player) {
+        return board[col].getRepresentation().equals(player.getRepresentation()) &&
+                board[col + racineCarre].getRepresentation().equals(player.getRepresentation()) &&
+                board[col + 2 * racineCarre].getRepresentation().equals(player.getRepresentation());
+    }
+
+    private boolean checkDiagonal(Player player) {
+        return board[0].getRepresentation().equals(player.getRepresentation()) &&
+                board[4].getRepresentation().equals(player.getRepresentation()) &&
+                board[8].getRepresentation().equals(player.getRepresentation()) ||
+                board[2].getRepresentation().equals(player.getRepresentation()) &&
+                board[4].getRepresentation().equals(player.getRepresentation()) &&
+                board[6].getRepresentation().equals(player.getRepresentation());
+    }
+
+    // pour chaque player:
+    // verifier si il a rempli un colonne
+    // verfier diagonal
+    // return si une des conddition est vrai
 
     private Player switchPlayer(Player currentPlayer) {
         System.out.println("last player: "+currentPlayer.getName());
@@ -127,3 +171,23 @@ public class TicTacToe {
     }
 
 }
+
+//    for (int i = 0; i<board.length; i++){
+//        if (board[i].getRepresentation().equals(player1.getRepresentation()) &&
+//board[i+1].getRepresentation().equals(player1.getRepresentation()) &&
+//board[i+2].getRepresentation().equals(player1.getRepresentation())){
+//        System.out.println("player 1 win this game");
+//                return true;
+//                        } else if(
+//board[1].getRepresentation().equals(player1.getRepresentation()) &&
+////board[1+1].getRepresentation().equals(player1.getRepresentation()) &&
+////board[1+2].getRepresentation().equals(player1.getRepresentation())) {
+//        System.out.println("player 1 win this game");
+//                return true;
+//                        }else if (
+//board[2].getRepresentation().equals(player1.getRepresentation()) &&
+//board[2+1].getRepresentation().equals(player1.getRepresentation()) &&
+//board[2+2].getRepresentation().equals(player1.getRepresentation())) {
+//        System.out.println("player 1 win this game");
+//                return true;
+
