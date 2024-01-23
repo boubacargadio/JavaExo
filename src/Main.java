@@ -3,7 +3,5 @@ public class Main {
         System.out.println("Tic Tac Toe");
         TicTacToe ticTacToe = new TicTacToe();
         ticTacToe.play();
-
-
     }
 }
