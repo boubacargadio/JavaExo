@@ -4,7 +4,6 @@ public class Player {
 
     public Player(){
         this( "| X ");
-
     }
     public Player(String representation){
         this(representation, "player 1");
